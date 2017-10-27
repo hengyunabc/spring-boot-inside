@@ -5,9 +5,14 @@ spring:
 server:
   port: 8888
 
-say-hello:
-  ribbon:
-    eureka:
-      enabled: false
-    listOfServers: localhost:8090,localhost:9092,localhost:9999
-    ServerListRefreshInterval: 15000
+management:
+  port: 8889
+  security:
+    enabled: false
+
+#say-hello:
+#  ribbon:
+#    eureka:
+#      enabled: true
+#    listOfServers: localhost:8090,localhost:9092,localhost:9999
+#    ServerListRefreshInterval: 15000
