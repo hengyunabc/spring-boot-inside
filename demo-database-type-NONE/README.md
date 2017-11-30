@@ -1,8 +1,12 @@
 
 
+## 写在前面
+
+这个demo来说明怎么一步步排查一个常见的spring boot AutoConfiguration的错误。
+
 ## 调试排查 Cannot determine embedded database driver class for database type NONE 的错误
 
-直接启动应用，抛出来的异常信息是：
+把工程导入IDE里，直接启动应用，抛出来的异常信息是：
 
 ```
 
@@ -175,20 +179,20 @@ org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanC
 
 那么再看下`org.apache.tomcat.jdbc.pool.DataSource`这个类是从哪里来的呢？
 
-从maven依赖树可以看到，依赖是来自：`spring-boot-starter-jdbc`。
+从maven依赖树可以看到，依赖是来自：`spring-boot-starter-jdbc`。所以是应用依赖了`spring-boot-starter-jdbc`，但是并没有配置`DataSource`引起的问题。
 
 ## 总结
 
 
-0. 应用没有使用到DataSource，但是在pom.xml里引入了`spring-boot-starter-jdbc`
+0. 应用没有使用到`DataSource`，但是在pom.xml里引入了`spring-boot-starter-jdbc`
 0. `spring-boot-starter-jdbc`带入了`tomcat-jdbc`，它里面有`org.apache.tomcat.jdbc.pool.DataSource`
 0. spring boot里的`PooledDataSourceConfiguration`，判断classpath下面有`DataSource`的实现类，尝试去创建`DataSource` bean
-0. 在初始化`DataSourceProperties`时，尝试通过jdbc的url来探测driver class，
-0. 因为应用并没有配置url，所以最终在determineDriverClassName()里抛出`Cannot determine embedded database driver class for database type NONE`
+0. 在初始化`DataSourceProperties`时，尝试通过jdbc的url来探测driver class
+0. 因为应用并没有配置url，所以最终在`DataSourceProperties.determineDriverClassName()`里抛出`Cannot determine embedded database driver class for database type NONE`
 
 最后：
 
-* 排查spring boot的AutoConfiguration问题时，可以按异常栈，一层层排查`Configuration`是怎么引入的，再排查`Condition`具体的判断代码
+* 排查spring boot的AutoConfiguration问题时，可以按异常栈，一层层排查`Configuration`是怎么引入的，再排查`Condition`具体的判断代码。
 
 
 
