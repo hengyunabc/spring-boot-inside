@@ -181,6 +181,27 @@ org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanC
 
 从maven依赖树可以看到，依赖是来自：`spring-boot-starter-jdbc`。所以是应用依赖了`spring-boot-starter-jdbc`，但是并没有配置`DataSource`引起的问题。
 
+## 问题解决办法
+
+有两种：
+
+1. 没有使用到`DataSource`，则可以把`spring-boot-starter-jdbc`的依赖去掉，这样就不会触发spring boot相关的代码
+2. 把spring boot自动初始化`DataSource`相关的代码禁止掉
+
+
+禁止的办法有两种：
+
+1. 在main函数上配置exclude
+
+      ```
+          @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class })
+      ```
+2. 在application.properties里配置：
+
+      ```
+          spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+      ```
+
 ## 总结
 
 
@@ -193,6 +214,3 @@ org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanC
 最后：
 
 * 排查spring boot的AutoConfiguration问题时，可以按异常栈，一层层排查`Configuration`是怎么引入的，再排查`Condition`具体的判断代码。
-
-
-
