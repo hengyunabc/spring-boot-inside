@@ -56,7 +56,7 @@ Caused by: java.lang.NullPointerException
 
 同一个bean里，明明`SqlSession sqlSession`已经被注入了，在``selectStudentById``里它是非null的。为什么`finalSelectStudentById`函数里是null？
 
-## 找到运行时的实际代码
+## 获取实际运行时的类名
 
 当然，我们对比两个函数，可以知道是因为`finalSelectStudentById`的修饰符是`final`。但是具体原因是什么呢？
 
@@ -97,7 +97,7 @@ $ jps
 sudo java -jar dumpclass.jar 5907 'sample.mybatis.dao.StudentDao*' /tmp/dumpresult
 ```
 
-### 反汇编分析
+## 反汇编分析
 
 用javap或者图形化工具jd-gui来反编绎`sample.mybatis.dao.StudentDao$$EnhancerBySpringCGLIB$$210b005d`。
 
@@ -184,4 +184,3 @@ sudo java -jar dumpclass.jar 5907 'sample.mybatis.dao.StudentDao*' /tmp/dumpresu
 
 * 排查问题多debug，看实际运行时的对象信息
 * 对于cglib生成类的字节码，可以用dumpclass工具来dump，再反编绎分析
-
