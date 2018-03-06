@@ -1,0 +1,6 @@
+
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.example.springboot1starter.HelloEndpointAutoConfiguration
+
+
