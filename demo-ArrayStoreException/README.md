@@ -195,6 +195,18 @@ java.lang.ArrayStoreException: sun.reflect.annotation.TypeNotPresentExceptionPro
 public class MyHealthIndicatorAutoConfiguration {
 ```
 
+准确来说是spring boot2把一些类的package改了：
+
+spring boot 1里类名是：
+
+* org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration
+
+spring boot 2里类名是：
+
+* org.springframework.boot.actuate.autoconfigure.endpoint.EndpointAutoConfiguration
+
+
+
 ## 总结
 
 * 当类加载时，并不会加载它的annotation的field所引用的`Class<?>`，当调用`Class.getDeclaredAnnotation(Class<A>)`里才会加载
