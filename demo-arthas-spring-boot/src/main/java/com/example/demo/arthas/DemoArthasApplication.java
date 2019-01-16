@@ -1,14 +1,14 @@
-package com.example.demo404401;
+package com.example.demo.arthas;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo404401.aop.HelloWorldService;
+import com.example.demo.arthas.aop.HelloWorldService;
 
 @SpringBootApplication
-public class Demo404401Application implements CommandLineRunner {
+public class DemoArthasApplication implements CommandLineRunner {
 
 	// Simple example shows how an application can spy on itself with AOP
 	@Autowired
@@ -20,7 +20,7 @@ public class Demo404401Application implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Demo404401Application.class, args);
+		SpringApplication.run(DemoArthasApplication.class, args);
 	}
 
 }

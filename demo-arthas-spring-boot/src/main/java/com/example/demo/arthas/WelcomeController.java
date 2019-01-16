@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.example.demo404401;
+package com.example.demo.arthas;
 
 import java.util.Date;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
