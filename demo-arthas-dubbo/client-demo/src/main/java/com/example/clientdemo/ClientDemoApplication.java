@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.example.User;
-import com.example.UserService;
+import com.example.service.UserService;
 
 @SpringBootApplication(scanBasePackages = "com.example")
 public class ClientDemoApplication {

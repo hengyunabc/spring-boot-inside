@@ -1,6 +1,8 @@
-package com.example;
+package com.example.service;
 
 import java.util.List;
+
+import com.example.User;
 
 public interface UserService {
 
