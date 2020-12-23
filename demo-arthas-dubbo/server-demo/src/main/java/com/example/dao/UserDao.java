@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.User;
 
 @Component
-@Service
 public class UserDao {
 
     private final SqlSession sqlSession;
